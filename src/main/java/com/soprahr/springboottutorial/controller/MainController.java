@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @ControllerAdvice
 public class MainController implements IMainController {
@@ -35,6 +37,13 @@ public class MainController implements IMainController {
     public ResponseEntity<User> getUser(@PathVariable @NonNull String id) throws Exception {
         User user = service.getUser(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "users")
+    @Override
+    public ResponseEntity<List<User>> getAllUsers() throws Exception {
+        List<User> list = service.getAllUsers();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @ExceptionHandler

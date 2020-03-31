@@ -7,6 +7,8 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MainServiceImpl implements IMainService {
 
@@ -14,6 +16,11 @@ public class MainServiceImpl implements IMainService {
 
     public MainServiceImpl(@Autowired IMainRepository r) {
         this.repository = r;
+    }
+
+    @Override
+    public List<User> getAllUsers() throws Exception {
+        return repository.selectAllUsers();
     }
 
     @Override

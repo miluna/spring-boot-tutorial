@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -18,6 +19,12 @@ public class MainRepositoryImpl implements IMainRepository {
     public MainRepositoryImpl(@Autowired JdbcTemplate j, @Autowired SimpleJdbcInsert i) {
         this.template = j;
         this.insert = i;
+    }
+
+    @Override
+    public List<User> selectAllUsers() {
+        String sql = "SELECT * FROM USUARIOS";
+        return template.query(sql, new UserMapper());
     }
 
     @Override
